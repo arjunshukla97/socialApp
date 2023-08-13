@@ -1,9 +1,12 @@
 import colors from '@constants/colors';
 import { heightPixel, widthPixel } from '@utils/helper';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
+	const { homeLoading } = useSelector(state => state.home);
+
 	return (
 		<View
 			style={{
