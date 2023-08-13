@@ -1,9 +1,9 @@
 import HTTP from '@utils/HTTP';
 
 class HomeService {
-	getFeed = () => {
+	getFeed = (limit = 10, offset = 0) => {
 		return HTTP.get(
-			'https://api.realworld.io/api/articles?limit=10&offset=0',
+			`https://api.realworld.io/api/articles?limit=${limit}&offset=${offset}`,
 		);
 	};
 }

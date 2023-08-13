@@ -4,6 +4,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	homeLoading: true,
 	postList: [],
+	limit: 10,
+	offset: 0,
+	articlesCount: 0,
 };
 
 const homeSlice = createSlice({
@@ -12,7 +15,15 @@ const homeSlice = createSlice({
 	// reducers: {},
 	extraReducers: builder => {
 		builder.addCase(getFeed.fulfilled, (state, action) => {
-			state.postList = action.payload.articles;
+			state.articlesCount = action.payload.articlesCount;
+			// if posts length is less than articleCount we don't need to increase the offset.
+			if (state.postList?.length < action.payload.articlesCount) {
+				state.postList = [
+					...state.postList,
+					...action.payload.articles,
+				];
+				state.offset = state.offset + 1;
+			}
 			state.homeLoading = false;
 		});
 	},
