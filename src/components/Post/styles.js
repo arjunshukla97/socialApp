@@ -10,12 +10,12 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
 	container: {
-		width: '92%',
+		width: '94%',
 		alignSelf: 'center',
 		backgroundColor: colors.theme,
 		borderRadius: pixelSizeVertical(10),
 		paddingTop: pixelSizeVertical(15),
-		marginTop: pixelSizeVertical(10),
+		marginTop: pixelSizeVertical(15),
 	},
 	row: { flexDirection: 'row', width: '92%', alignSelf: 'center' },
 	circle: {

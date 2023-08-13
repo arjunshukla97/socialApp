@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import { Post } from '@components/Post';
 import colors from '@constants/colors';
 import { getFeed } from '@redux/action/home';
 import { useDispatch, useSelector } from 'react-redux';
+import { PostList } from '@components/PostList';
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const Home = () => {
 				backgroundColor: colors.background,
 			}}
 		>
-			<Post item={postList[0]} />
+			<PostList data={postList} />
 		</View>
 	);
 };
