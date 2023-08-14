@@ -9,6 +9,16 @@ class HomeService {
 	getSinglePost = slug => {
 		return HTTP.get(`https://api.realworld.io/api/articles/${slug}`);
 	};
+	getComments = (slug, token) => {
+		return HTTP.get(
+			`https://api.realworld.io/api/articles/${slug}/comments`,
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			},
+		);
+	};
 }
 
 export default new HomeService();

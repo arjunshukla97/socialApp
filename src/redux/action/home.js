@@ -18,3 +18,12 @@ export const getSinglePost = createAsyncThunk(
 		return response.data;
 	},
 );
+
+export const getComments = createAsyncThunk(
+	'home/getComments',
+	async ({ slug, token }) => {
+		const response = await HomeService.getComments(slug, token);
+		console.log('getComments => ', response.data);
+		return response.data;
+	},
+);

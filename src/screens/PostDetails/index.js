@@ -1,19 +1,53 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { styles } from './styles';
 import { Post } from '@components/Post';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSinglePost } from '@redux/action/home';
+import { getComments, getSinglePost } from '@redux/action/home';
 import { Loader } from '@components/Loader';
+import { Comment } from '@components/Comment';
+import { FlashList } from '@shopify/flash-list';
+import Text from '@components/Text';
+import { Ionicons } from '@expo/vector-icons';
+import { heightPixel } from '@utils/helper';
+import colors from '@constants/colors';
 
 const PostDetails = ({ route }) => {
 	const slug = route?.params?.slug || '';
 	const dispatch = useDispatch();
-	const { singlePost, homeLoading } = useSelector(state => state.home);
+	const { singlePost, comments, homeLoading } = useSelector(
+		state => state.home,
+	);
+	const { user } = useSelector(state => state.auth);
 
 	useEffect(() => {
-		dispatch(getSinglePost(slug));
-	}, [slug]);
+		Promise.all([
+			dispatch(getSinglePost(slug)),
+			dispatch(getComments({ slug: slug, token: user?.token })),
+		]);
+	}, [slug, user?.token]);
+
+	const _renderItem = ({ item, index }) => {
+		return <Comment item={item} />;
+	};
+	const _listHeaderComponent = () => {
+		return (
+			<>
+				<Post item={singlePost} />
+				<View style={styles.divider}>
+					<Text style={styles.comments}>Comments</Text>
+					<Text style={styles.comments}>
+						Latest{' '}
+						<Ionicons
+							name='chevron-down'
+							size={heightPixel(15)}
+							color={colors.text}
+						/>
+					</Text>
+				</View>
+			</>
+		);
+	};
 
 	if (homeLoading) {
 		return <Loader />;
@@ -21,7 +55,12 @@ const PostDetails = ({ route }) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Post item={singlePost} />
+			<FlashList
+				data={comments}
+				renderItem={_renderItem}
+				estimatedItemSize={90}
+				ListHeaderComponent={_listHeaderComponent}
+			/>
 		</SafeAreaView>
 	);
 };

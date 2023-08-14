@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { styles } from './styles';
 import Text from '@components/Text';
 import { Ionicons, FontAwesome5, AntDesign } from '@expo/vector-icons';
@@ -7,7 +7,7 @@ import { fontPixel } from '@utils/helper';
 import colors from '@constants/colors';
 import { navigate } from '@navigator/functions';
 import { useSelector } from 'react-redux';
-import { PLACEHOLDER_IMAGE } from '@constants/index';
+import { ProfilePic } from '@components/ProfilePic';
 
 export const Post = ({ item = {} }) => {
 	const { user } = useSelector(state => state.auth);
@@ -16,17 +16,7 @@ export const Post = ({ item = {} }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.row}>
-				<View style={styles.circle}>
-					<Image
-						style={styles.img}
-						source={{
-							uri: item?.author?.image
-								? item.author.image
-								: PLACEHOLDER_IMAGE,
-						}}
-						resizeMode='contain'
-					/>
-				</View>
+				<ProfilePic size={40} uri={item?.author?.image} />
 				<View style={styles.column}>
 					<Text style={styles.user}>{item?.author?.username}</Text>
 					{item?.author?.bio ? <Text>{item.author.bio}</Text> : null}

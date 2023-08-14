@@ -1,4 +1,4 @@
-import { getFeed, getSinglePost } from '@redux/action/home';
+import { getComments, getFeed, getSinglePost } from '@redux/action/home';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
 	offset: 0,
 	articlesCount: 0,
 	singlePost: {},
+	comments: [],
 };
 
 const homeSlice = createSlice({
@@ -35,6 +36,16 @@ const homeSlice = createSlice({
 			state.homeLoading = true;
 		});
 		builder.addCase(getSinglePost.rejected, (state, action) => {
+			state.homeLoading = false;
+		});
+		builder.addCase(getComments.fulfilled, (state, action) => {
+			state.comments = action.payload.comments;
+			state.homeLoading = false;
+		});
+		builder.addCase(getComments.pending, (state, action) => {
+			state.homeLoading = true;
+		});
+		builder.addCase(getComments.rejected, (state, action) => {
 			state.homeLoading = false;
 		});
 	},

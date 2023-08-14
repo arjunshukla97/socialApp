@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, Image, SafeAreaView, View } from 'react-native';
+import { ActivityIndicator, SafeAreaView, View } from 'react-native';
 import colors from '@constants/colors';
 import { getFeed } from '@redux/action/home';
 import { useDispatch, useSelector } from 'react-redux';
 import { PostList } from '@components/PostList';
 import { styles } from './styles';
 import Text from '@components/Text';
-import { PLACEHOLDER_IMAGE } from '@constants/index';
+import { ProfilePic } from '@components/ProfilePic';
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -26,15 +26,8 @@ const Home = () => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.row}>
-				<View style={styles.circle}>
-					<Image
-						style={styles.img}
-						source={{
-							uri: user?.image ? user.image : PLACEHOLDER_IMAGE,
-						}}
-						resizeMode='contain'
-					/>
-				</View>
+				<ProfilePic size={50} uri={user?.image} border />
+
 				<View style={styles.column}>
 					<Text style={styles.user}>Welcome,</Text>
 					<Text style={styles.userName}>
