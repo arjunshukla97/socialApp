@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
 		color: colors.text,
 		marginLeft: pixelSizeHorizontal(15),
 		fontWeight: '500',
+		marginBottom: pixelSizeVertical(10),
 	},
 	inputBody: {
 		flexDirection: 'row',
@@ -26,12 +27,11 @@ export const styles = StyleSheet.create({
 		height: heightPixel(50),
 		backgroundColor: colors.third,
 		borderRadius: heightPixel(30),
-		marginTop: pixelSizeVertical(10),
 		paddingHorizontal: pixelSizeHorizontal(20),
 	},
 	input: {
 		flex: 1,
-		height: '100%',
 		color: colors.text,
+		marginVertical: pixelSizeVertical(10),
 	},
 });

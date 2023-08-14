@@ -7,7 +7,7 @@ import { getDataFromSecureStore, heightPixel } from '@utils/helper';
 import colors from '@constants/colors';
 import { createNavigationContainerRef } from '@react-navigation/native';
 import { universalGoBack } from './functions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '@redux/reducer/authSlice';
 
 export const navigationRef = createNavigationContainerRef();
@@ -15,9 +15,10 @@ const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
 	const dispatch = useDispatch();
+	const { user } = useSelector(state => state.auth);
 
 	useEffect(() => {
-		fetchUserInfo();
+		if (!user?.token) fetchUserInfo();
 	}, []);
 
 	const fetchUserInfo = async () => {

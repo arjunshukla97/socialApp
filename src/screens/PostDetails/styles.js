@@ -1,5 +1,5 @@
 import colors from '@constants/colors';
-import { fontPixel, pixelSizeVertical } from '@utils/helper';
+import { pixelSizeVertical } from '@utils/helper';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -15,9 +15,5 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: '4%',
 		marginTop: pixelSizeVertical(8),
 		justifyContent: 'space-between',
-	},
-	comments: {
-		fontWeight: '700',
-		fontSize: fontPixel(16),
 	},
 });

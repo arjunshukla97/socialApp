@@ -27,3 +27,12 @@ export const getComments = createAsyncThunk(
 		return response.data;
 	},
 );
+
+export const addComment = createAsyncThunk(
+	'home/addComment',
+	async ({ slug, data, token }) => {
+		const response = await HomeService.addComment(slug, data, token);
+		console.log('addComment => ', response.data);
+		return response.data;
+	},
+);

@@ -11,14 +11,18 @@ export const Input = ({
 	onChangeText,
 	label,
 	isSecure,
+	containerStyle,
+	RightComponent,
+	LeftComponent,
 	...otherProps
 }) => {
 	const [secure, setSecure] = useState(true);
 
 	return (
-		<View style={styles.container}>
-			<Text style={styles.label}>{label}</Text>
+		<View style={{ ...styles.container, ...containerStyle }}>
+			{label ? <Text style={styles.label}>{label}</Text> : null}
 			<View style={styles.inputBody}>
+				{RightComponent ? <RightComponent /> : null}
 				<TextInput
 					value={value}
 					style={styles.input}
@@ -37,6 +41,8 @@ export const Input = ({
 						style={{ marginLeft: pixelSizeHorizontal(10) }}
 						color={colors.secondary}
 					/>
+				) : LeftComponent ? (
+					<LeftComponent />
 				) : null}
 			</View>
 		</View>

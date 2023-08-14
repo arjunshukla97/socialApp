@@ -19,6 +19,17 @@ class HomeService {
 			},
 		);
 	};
+	addComment = (slug, data, token) => {
+		return HTTP.post(
+			`https://api.realworld.io/api/articles/${slug}/comments`,
+			data,
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			},
+		);
+	};
 }
 
 export default new HomeService();

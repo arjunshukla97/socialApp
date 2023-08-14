@@ -11,6 +11,7 @@ import Text from '@components/Text';
 import { Ionicons } from '@expo/vector-icons';
 import { heightPixel } from '@utils/helper';
 import colors from '@constants/colors';
+import { CommentInput } from '@components/CommentInput';
 
 const PostDetails = ({ route }) => {
 	const slug = route?.params?.slug || '';
@@ -55,12 +56,15 @@ const PostDetails = ({ route }) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<FlashList
-				data={comments}
-				renderItem={_renderItem}
-				estimatedItemSize={90}
-				ListHeaderComponent={_listHeaderComponent}
-			/>
+			<View style={{ flex: 1 }}>
+				<FlashList
+					data={comments}
+					renderItem={_renderItem}
+					estimatedItemSize={90}
+					ListHeaderComponent={_listHeaderComponent}
+				/>
+			</View>
+			<CommentInput slug={slug} />
 		</SafeAreaView>
 	);
 };
