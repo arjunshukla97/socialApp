@@ -3,15 +3,15 @@ import Home from '@screens/Home';
 
 export const STACKS = [
 	{
-		title: 'Home',
+		title: '',
 		component: Home,
 		key: 'Home',
 		header: true,
 	},
 	{
-		title: 'Login',
+		title: '',
 		component: Login,
 		key: 'Login',
-		header: false,
+		header: true,
 	},
 ];

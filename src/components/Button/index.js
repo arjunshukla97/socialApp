@@ -2,7 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '@constants/colors';
-import styles from './styles';
+import { styles } from './styles';
 
 export const Button = ({
 	onPress,

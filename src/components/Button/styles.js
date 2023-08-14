@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import colors from '@constants/colors';
 import { heightPixel, fontPixel, pixelSizeVertical } from '@utils/helper';
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
 	linearGradient: {
 		height: heightPixel(50),
 		width: '92%',

@@ -27,7 +27,7 @@ const Navigator = () => {
 							presentation: item?.presentation || 'card',
 							headerTitleAlign: 'center',
 							headerStyle: {
-								backgroundColor: colors.theme,
+								backgroundColor: colors.background,
 							},
 							headerTitleStyle: {
 								color: colors.text,
@@ -35,7 +35,7 @@ const Navigator = () => {
 							headerLeft: () => (
 								<Ionicons
 									name='chevron-back'
-									size={heightPixel(25)}
+									size={heightPixel(30)}
 									color={colors.text}
 									onPress={universalGoBack}
 								/>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Pressable, View } from 'react-native';
 import { styles } from './styles';
 import Text from '@components/Text';
@@ -6,8 +6,12 @@ import { Ionicons, FontAwesome5, AntDesign } from '@expo/vector-icons';
 import { fontPixel } from '@utils/helper';
 import colors from '@constants/colors';
 import { navigate } from '@navigator/functions';
+import { useSelector } from 'react-redux';
 
 export const Post = ({ item = {} }) => {
+	const { user } = useSelector(state => state.auth);
+	const [readMore, setReadMore] = useState(false);
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.row}>
@@ -24,14 +28,30 @@ export const Post = ({ item = {} }) => {
 				</View>
 			</View>
 			<Text style={styles.title}>{item.title}</Text>
-			<Text style={styles.text}>{item.description}</Text>
+			<Text style={styles.text}>
+				{' '}
+				{item?.description?.length < 150
+					? item.description
+					: readMore
+					? item.description
+					: item.description?.slice(0, 150)}{' '}
+				{!readMore && item?.description?.length > 150 ? (
+					<Text
+						style={{ ...styles.text, color: colors.primary }}
+						onPress={() => setReadMore(true)}
+					>
+						...Read more
+					</Text>
+				) : null}
+			</Text>
 			<View style={styles.footer}>
-				<View
+				<Pressable
 					style={{
 						...styles.row,
 						width: '20%',
 						justifyContent: 'center',
 					}}
+					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
 				>
 					<AntDesign
 						name={item?.favorited ? 'heart' : 'hearto'}
@@ -39,63 +59,63 @@ export const Post = ({ item = {} }) => {
 						color={colors.secondary}
 					/>
 					<Text style={styles.iconText}>{item?.favoritesCount}</Text>
-				</View>
+				</Pressable>
 				<Pressable
 					style={{
 						...styles.row,
 						width: '20%',
 						justifyContent: 'center',
 					}}
-					onPress={() => navigate('Login')}
+					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
 				>
 					<Ionicons
 						name={'chatbubble-outline'}
 						size={fontPixel(17)}
 						color={colors.secondary}
 					/>
-					{/* <Text style={styles.iconText}>{item?.favoritesCount}</Text> */}
 				</Pressable>
-				<View
+				<Pressable
 					style={{
 						...styles.row,
 						width: '20%',
 						justifyContent: 'center',
 					}}
+					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
 				>
 					<FontAwesome5
 						name={'share-square'}
 						size={fontPixel(16)}
 						color={colors.secondary}
 					/>
-					{/* <Text style={styles.iconText}>{item?.favoritesCount}</Text> */}
-				</View>
-				<View
+				</Pressable>
+				<Pressable
 					style={{
 						...styles.row,
 						width: '20%',
 						justifyContent: 'center',
 					}}
+					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
 				>
 					<AntDesign
 						name={'retweet'}
 						size={fontPixel(18)}
 						color={colors.secondary}
 					/>
-					{/* <Text style={styles.iconText}>{item?.favoritesCount}</Text> */}
-				</View>
-				<View
+				</Pressable>
+				<Pressable
 					style={{
 						...styles.row,
 						width: '20%',
 						justifyContent: 'center',
 					}}
+					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
 				>
 					<AntDesign
 						name={'gift'}
 						size={fontPixel(17)}
 						color={colors.secondary}
 					/>
-				</View>
+				</Pressable>
 			</View>
 		</View>
 	);
