@@ -7,6 +7,7 @@ import { fontPixel } from '@utils/helper';
 import colors from '@constants/colors';
 import { navigate } from '@navigator/functions';
 import { useSelector } from 'react-redux';
+import { PLACEHOLDER_IMAGE } from '@constants/index';
 
 export const Post = ({ item = {} }) => {
 	const { user } = useSelector(state => state.auth);
@@ -18,7 +19,11 @@ export const Post = ({ item = {} }) => {
 				<View style={styles.circle}>
 					<Image
 						style={styles.img}
-						source={{ uri: item?.author?.image }}
+						source={{
+							uri: item?.author?.image
+								? item.author.image
+								: PLACEHOLDER_IMAGE,
+						}}
 						resizeMode='contain'
 					/>
 				</View>
@@ -66,7 +71,11 @@ export const Post = ({ item = {} }) => {
 						width: '20%',
 						justifyContent: 'center',
 					}}
-					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
+					onPress={() =>
+						user?.token
+							? navigate('PostDetails', { slug: item?.slug })
+							: navigate('Login')
+					}
 				>
 					<Ionicons
 						name={'chatbubble-outline'}

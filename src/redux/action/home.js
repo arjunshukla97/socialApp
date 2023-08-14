@@ -9,3 +9,12 @@ export const getFeed = createAsyncThunk(
 		return response.data;
 	},
 );
+
+export const getSinglePost = createAsyncThunk(
+	'home/getSinglePost',
+	async slug => {
+		const response = await HomeService.getSinglePost(slug);
+		console.log('getSinglePost => ', response.data);
+		return response.data;
+	},
+);

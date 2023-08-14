@@ -6,6 +6,9 @@ class HomeService {
 			`https://api.realworld.io/api/articles?limit=${limit}&offset=${offset}`,
 		);
 	};
+	getSinglePost = slug => {
+		return HTTP.get(`https://api.realworld.io/api/articles/${slug}`);
+	};
 }
 
 export default new HomeService();

@@ -1,4 +1,4 @@
-import { getFeed } from '@redux/action/home';
+import { getFeed, getSinglePost } from '@redux/action/home';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
 	limit: 10,
 	offset: 0,
 	articlesCount: 0,
+	singlePost: {},
 };
 
 const homeSlice = createSlice({
@@ -24,6 +25,16 @@ const homeSlice = createSlice({
 				];
 				state.offset = state.offset + 1;
 			}
+			state.homeLoading = false;
+		});
+		builder.addCase(getSinglePost.fulfilled, (state, action) => {
+			state.singlePost = action.payload.article;
+			state.homeLoading = false;
+		});
+		builder.addCase(getSinglePost.pending, (state, action) => {
+			state.homeLoading = true;
+		});
+		builder.addCase(getSinglePost.rejected, (state, action) => {
 			state.homeLoading = false;
 		});
 	},
