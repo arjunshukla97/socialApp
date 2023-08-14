@@ -3,7 +3,7 @@ import { Pressable, View } from 'react-native';
 import { styles } from './styles';
 import Text from '@components/Text';
 import { Ionicons, FontAwesome5, AntDesign } from '@expo/vector-icons';
-import { fontPixel } from '@utils/helper';
+import { convertTime, fontPixel } from '@utils/helper';
 import colors from '@constants/colors';
 import { navigate } from '@navigator/functions';
 import { useSelector } from 'react-redux';
@@ -14,12 +14,22 @@ export const Post = ({ item = {} }) => {
 	const [readMore, setReadMore] = useState(false);
 
 	return (
-		<View style={styles.container}>
+		<Pressable
+			style={styles.container}
+			onPress={() =>
+				user?.token
+					? navigate('PostDetails', { slug: item?.slug })
+					: navigate('Login')
+			}
+		>
 			<View style={styles.row}>
 				<ProfilePic size={40} uri={item?.author?.image} />
 				<View style={styles.column}>
 					<Text style={styles.user}>{item?.author?.username}</Text>
 					{item?.author?.bio ? <Text>{item.author.bio}</Text> : null}
+					<Text style={styles.time}>
+						{convertTime(item?.updatedAt)}
+					</Text>
 				</View>
 			</View>
 			<Text style={styles.title}>{item.title}</Text>
@@ -46,7 +56,11 @@ export const Post = ({ item = {} }) => {
 						width: '20%',
 						justifyContent: 'center',
 					}}
-					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
+					onPress={() =>
+						user?.token
+							? alert('Feature not available')
+							: navigate('Login')
+					}
 				>
 					<AntDesign
 						name={item?.favorited ? 'heart' : 'hearto'}
@@ -79,7 +93,11 @@ export const Post = ({ item = {} }) => {
 						width: '20%',
 						justifyContent: 'center',
 					}}
-					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
+					onPress={() =>
+						user?.token
+							? alert('Feature not available')
+							: navigate('Login')
+					}
 				>
 					<FontAwesome5
 						name={'share-square'}
@@ -93,7 +111,11 @@ export const Post = ({ item = {} }) => {
 						width: '20%',
 						justifyContent: 'center',
 					}}
-					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
+					onPress={() =>
+						user?.token
+							? alert('Feature not available')
+							: navigate('Login')
+					}
 				>
 					<AntDesign
 						name={'retweet'}
@@ -107,7 +129,11 @@ export const Post = ({ item = {} }) => {
 						width: '20%',
 						justifyContent: 'center',
 					}}
-					onPress={() => (user?.token ? alert(1) : navigate('Login'))}
+					onPress={() =>
+						user?.token
+							? alert('Feature not available')
+							: navigate('Login')
+					}
 				>
 					<AntDesign
 						name={'gift'}
@@ -116,6 +142,6 @@ export const Post = ({ item = {} }) => {
 					/>
 				</Pressable>
 			</View>
-		</View>
+		</Pressable>
 	);
 };

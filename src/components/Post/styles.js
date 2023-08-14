@@ -41,6 +41,12 @@ export const styles = StyleSheet.create({
 		fontSize: fontPixel(15),
 		fontWeight: '500',
 	},
+	time: {
+		fontSize: fontPixel(12),
+		fontWeight: '500',
+		color: colors.secondary,
+		marginTop: pixelSizeVertical(3),
+	},
 	bio: {
 		fontSize: fontPixel(13.5),
 		fontWeight: '400',

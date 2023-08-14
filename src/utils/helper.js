@@ -58,3 +58,21 @@ export const getDataFromSecureStore = async key => {
 		return null;
 	}
 };
+
+export const convertTime = date => {
+	let currentDate = new Date();
+	let startDate = new Date(date);
+	let ms = Math.abs(currentDate - startDate);
+	let seconds = Math.round(ms / 1000);
+	let minutes = Math.round(ms / (1000 * 60));
+	let hours = Math.round(ms / (1000 * 60 * 60));
+	let days = Math.round(ms / (1000 * 60 * 60 * 24));
+	let month = Math.round(ms / (1000 * 60 * 60 * 24 * 30));
+	let year = Math.round(ms / (1000 * 60 * 60 * 24 * 30 * 12));
+	if (seconds < 60) return seconds + 's ago';
+	else if (minutes < 60) return minutes + 'min ago';
+	else if (hours < 24) return hours + 'h ago';
+	else if (days < 31) return days + 'd ago';
+	else if (month < 12) return month + 'M ago';
+	else return year + 'y ago';
+};

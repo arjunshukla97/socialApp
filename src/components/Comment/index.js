@@ -5,7 +5,7 @@ import { ProfilePic } from '@components/ProfilePic';
 import Text from '@components/Text';
 import { AntDesign } from '@expo/vector-icons';
 import colors from '@constants/colors';
-import { fontPixel, pixelSizeHorizontal } from '@utils/helper';
+import { convertTime, fontPixel, pixelSizeHorizontal } from '@utils/helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '@redux/action/home';
 
@@ -22,6 +22,9 @@ export const Comment = ({ item = {}, slug = '' }) => {
 				<ProfilePic size={40} uri={item?.author?.image} />
 				<View style={styles.column}>
 					<Text style={styles.user}>{item?.author?.username}</Text>
+					<Text style={styles.time}>
+						{convertTime(item?.updatedAt)}
+					</Text>
 					<Text>{item?.body} </Text>
 					{item?.author?.username === user.username ? (
 						<View style={{ ...styles.row, ...styles.row2 }}>

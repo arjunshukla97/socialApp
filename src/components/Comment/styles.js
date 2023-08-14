@@ -29,6 +29,12 @@ export const styles = StyleSheet.create({
 		fontSize: fontPixel(15),
 		fontWeight: '700',
 	},
+	time: {
+		fontSize: fontPixel(12),
+		fontWeight: '500',
+		color: colors.secondary,
+		marginVertical: pixelSizeVertical(3),
+	},
 	row2: {
 		marginTop: pixelSizeVertical(8),
 		width: '100%',
