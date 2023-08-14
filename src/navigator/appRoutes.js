@@ -1,3 +1,4 @@
+import Login from '@screens/Auth/Login';
 import Home from '@screens/Home';
 
 export const STACKS = [
@@ -6,5 +7,11 @@ export const STACKS = [
 		component: Home,
 		key: 'Home',
 		header: true,
+	},
+	{
+		title: 'Login',
+		component: Login,
+		key: 'Login',
+		header: false,
 	},
 ];

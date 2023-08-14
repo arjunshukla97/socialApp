@@ -5,6 +5,10 @@ import { STACKS } from './appRoutes';
 import { Ionicons } from '@expo/vector-icons';
 import { heightPixel } from '@utils/helper';
 import colors from '@constants/colors';
+import { createNavigationContainerRef } from '@react-navigation/native';
+import { universalGoBack } from './functions';
+
+export const navigationRef = createNavigationContainerRef();
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
@@ -33,7 +37,7 @@ const Navigator = () => {
 									name='chevron-back'
 									size={heightPixel(25)}
 									color={colors.text}
-									// onPress={handleGoBack}
+									onPress={universalGoBack}
 								/>
 							),
 						}}

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image, Pressable, View } from 'react-native';
 import { styles } from './styles';
 import Text from '@components/Text';
 import { Ionicons, FontAwesome5, AntDesign } from '@expo/vector-icons';
 import { fontPixel } from '@utils/helper';
 import colors from '@constants/colors';
+import { navigate } from '@navigator/functions';
 
 export const Post = ({ item = {} }) => {
 	return (
@@ -39,12 +40,13 @@ export const Post = ({ item = {} }) => {
 					/>
 					<Text style={styles.iconText}>{item?.favoritesCount}</Text>
 				</View>
-				<View
+				<Pressable
 					style={{
 						...styles.row,
 						width: '20%',
 						justifyContent: 'center',
 					}}
+					onPress={() => navigate('Login')}
 				>
 					<Ionicons
 						name={'chatbubble-outline'}
@@ -52,7 +54,7 @@ export const Post = ({ item = {} }) => {
 						color={colors.secondary}
 					/>
 					{/* <Text style={styles.iconText}>{item?.favoritesCount}</Text> */}
-				</View>
+				</Pressable>
 				<View
 					style={{
 						...styles.row,
