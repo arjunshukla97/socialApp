@@ -9,7 +9,12 @@ export const PostList = ({ data = [], ...otherProps }) => {
 	};
 	return (
 		<View style={{ flex: 1 }}>
-			<FlashList data={data} renderItem={_renderItem} {...otherProps} />
+			<FlashList
+				data={data}
+				renderItem={_renderItem}
+				estimatedItemSize={170}
+				{...otherProps}
+			/>
 		</View>
 	);
 };

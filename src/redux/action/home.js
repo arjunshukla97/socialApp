@@ -10,6 +10,15 @@ export const getFeed = createAsyncThunk(
 	},
 );
 
+export const getNewPosts = createAsyncThunk(
+	'home/getNewPosts',
+	async ({ limit, offset }) => {
+		const response = await HomeService.getFeed(limit, offset);
+		console.log('getNewPosts => ', response.data);
+		return response.data;
+	},
+);
+
 export const getSinglePost = createAsyncThunk(
 	'home/getSinglePost',
 	async slug => {

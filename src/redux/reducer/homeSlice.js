@@ -3,6 +3,7 @@ import {
 	deleteComment,
 	getComments,
 	getFeed,
+	getNewPosts,
 	getSinglePost,
 } from '@redux/action/home';
 import { createSlice } from '@reduxjs/toolkit';
@@ -15,12 +16,19 @@ const initialState = {
 	articlesCount: 0,
 	singlePost: {},
 	comments: [],
+	newPostAvailable: false,
 };
 
 const homeSlice = createSlice({
 	name: 'home',
 	initialState,
-	// reducers: {},
+	reducers: {
+		reloadPost: state => {
+			state.postList = [];
+			state.offset = 0;
+			state.newPostAvailable = false;
+		},
+	},
 	extraReducers: builder => {
 		builder.addCase(getFeed.fulfilled, (state, action) => {
 			state.articlesCount = action.payload.articlesCount;
@@ -33,6 +41,14 @@ const homeSlice = createSlice({
 				state.offset = state.offset + 1;
 			}
 			state.homeLoading = false;
+		});
+		builder.addCase(getFeed.rejected, state => {
+			state.homeLoading = false;
+		});
+		builder.addCase(getNewPosts.fulfilled, (state, action) => {
+			if (state.postList[0]?.slug != action.payload.articles[0].slug) {
+				state.newPostAvailable = true;
+			}
 		});
 		builder.addCase(getSinglePost.fulfilled, (state, action) => {
 			state.singlePost = action.payload.article;
@@ -66,5 +82,5 @@ const homeSlice = createSlice({
 		});
 	},
 });
-// export const {  } = homeSlice.actions;
+export const { reloadPost } = homeSlice.actions;
 export default homeSlice.reducer;

@@ -44,4 +44,27 @@ export const styles = StyleSheet.create({
 		fontSize: fontPixel(20),
 		fontWeight: '700',
 	},
+	newPostContainer: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		position: 'absolute',
+		borderRadius: fontPixel(25),
+		backgroundColor: colors.primary,
+		zIndex: 1,
+		alignSelf: 'center',
+		shadowColor: colors.secondary,
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.5,
+		shadowRadius: 3.84,
+		elevation: 5,
+		marginTop: pixelSizeVertical(10),
+	},
+	newPost: {
+		fontWeight: '700',
+		marginHorizontal: pixelSizeHorizontal(15),
+		marginVertical: pixelSizeVertical(4),
+	},
 });
