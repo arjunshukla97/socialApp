@@ -36,3 +36,12 @@ export const addComment = createAsyncThunk(
 		return response.data;
 	},
 );
+
+export const deleteComment = createAsyncThunk(
+	'home/deleteComment',
+	async ({ slug, id, token }) => {
+		const response = await HomeService.deleteComment(slug, id, token);
+		console.log('deleteComment => ', response.data);
+		return { response: response.data, id: id };
+	},
+);

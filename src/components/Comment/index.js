@@ -5,9 +5,17 @@ import { ProfilePic } from '@components/ProfilePic';
 import Text from '@components/Text';
 import { AntDesign } from '@expo/vector-icons';
 import colors from '@constants/colors';
-import { fontPixel } from '@utils/helper';
+import { fontPixel, pixelSizeHorizontal } from '@utils/helper';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteComment } from '@redux/action/home';
 
-export const Comment = ({ item = {} }) => {
+export const Comment = ({ item = {}, slug = '' }) => {
+	const dispatch = useDispatch();
+	const { user } = useSelector(state => state.auth);
+
+	const _delete = () => {
+		dispatch(deleteComment({ slug, id: item.id, token: user?.token }));
+	};
 	return (
 		<View style={styles.container}>
 			<View style={styles.row}>
@@ -15,6 +23,25 @@ export const Comment = ({ item = {} }) => {
 				<View style={styles.column}>
 					<Text style={styles.user}>{item?.author?.username}</Text>
 					<Text>{item?.body} </Text>
+					{item?.author?.username === user.username ? (
+						<View style={{ ...styles.row, ...styles.row2 }}>
+							<Text
+								style={styles.delete}
+								onPress={() => alert('Feature in progress...')}
+							>
+								Edit
+							</Text>
+							<Text
+								style={{
+									...styles.delete,
+									marginLeft: pixelSizeHorizontal(10),
+								}}
+								onPress={_delete}
+							>
+								Delete
+							</Text>
+						</View>
+					) : null}
 				</View>
 				<AntDesign
 					name={'hearto'}

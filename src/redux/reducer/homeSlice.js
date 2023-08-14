@@ -1,5 +1,6 @@
 import {
 	addComment,
+	deleteComment,
 	getComments,
 	getFeed,
 	getSinglePost,
@@ -55,6 +56,12 @@ const homeSlice = createSlice({
 		});
 		builder.addCase(addComment.fulfilled, (state, action) => {
 			state.comments = [action.payload.comment, ...state.comments];
+			state.homeLoading = false;
+		});
+		builder.addCase(deleteComment.fulfilled, (state, action) => {
+			state.comments = state.comments?.filter(
+				x => x.id != action.payload.id,
+			);
 			state.homeLoading = false;
 		});
 	},

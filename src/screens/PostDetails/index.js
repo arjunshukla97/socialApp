@@ -28,15 +28,17 @@ const PostDetails = ({ route }) => {
 		]);
 	}, [slug, user?.token]);
 
-	const _renderItem = ({ item, index }) => {
-		return <Comment item={item} />;
+	const _renderItem = ({ item }) => {
+		return <Comment item={item} slug={slug} />;
 	};
 	const _listHeaderComponent = () => {
 		return (
 			<>
 				<Post item={singlePost} />
 				<View style={styles.divider}>
-					<Text style={styles.comments}>Comments</Text>
+					<Text style={styles.comments}>
+						Comments ({comments.length})
+					</Text>
 					<Text style={styles.comments}>
 						Latest{' '}
 						<Ionicons

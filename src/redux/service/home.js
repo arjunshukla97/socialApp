@@ -30,6 +30,16 @@ class HomeService {
 			},
 		);
 	};
+	deleteComment = (slug, id, token) => {
+		return HTTP.delete(
+			`https://api.realworld.io/api/articles/${slug}/comments/${id}`,
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			},
+		);
+	};
 }
 
 export default new HomeService();

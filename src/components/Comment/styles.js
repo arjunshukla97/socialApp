@@ -29,10 +29,12 @@ export const styles = StyleSheet.create({
 		fontSize: fontPixel(15),
 		fontWeight: '700',
 	},
-	bio: {
-		fontSize: fontPixel(13.5),
-		fontWeight: '400',
+	row2: {
+		marginTop: pixelSizeVertical(8),
+		width: '100%',
+	},
+	delete: {
+		fontSize: fontPixel(14),
 		color: colors.secondary,
-		marginTop: pixelSizeVertical(2),
 	},
 });
