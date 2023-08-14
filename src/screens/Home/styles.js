@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		width: '92%',
 		alignSelf: 'center',
-		marginBottom: pixelSizeVertical(10),
+		marginVertical: pixelSizeVertical(10),
 	},
 	circle: {
 		height: heightPixel(57),

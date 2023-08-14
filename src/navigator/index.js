@@ -9,6 +9,7 @@ import { createNavigationContainerRef } from '@react-navigation/native';
 import { universalGoBack } from './functions';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '@redux/reducer/authSlice';
+import { StatusBar } from 'expo-status-bar';
 
 export const navigationRef = createNavigationContainerRef();
 const Stack = createNativeStackNavigator();
@@ -28,6 +29,12 @@ const Navigator = () => {
 
 	return (
 		<SafeAreaProvider>
+			<StatusBar
+				style={'light'}
+				backgroundColor={colors.background}
+				translucent={false}
+				animated
+			/>
 			<Stack.Navigator>
 				{STACKS?.map((item, index) => (
 					<Stack.Screen

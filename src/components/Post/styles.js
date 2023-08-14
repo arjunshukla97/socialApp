@@ -71,6 +71,7 @@ export const styles = StyleSheet.create({
 		fontSize: fontPixel(14),
 		color: colors.secondary,
 		marginLeft: pixelSizeHorizontal(5),
+		marginTop: -pixelSizeVertical(2),
 	},
 	footer: {
 		flexDirection: 'row',
