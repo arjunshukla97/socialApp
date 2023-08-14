@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { STACKS } from './appRoutes';
 import { Ionicons } from '@expo/vector-icons';
-import { heightPixel } from '@utils/helper';
+import { getDataFromSecureStore, heightPixel } from '@utils/helper';
 import colors from '@constants/colors';
 import { createNavigationContainerRef } from '@react-navigation/native';
 import { universalGoBack } from './functions';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@redux/reducer/authSlice';
 
 export const navigationRef = createNavigationContainerRef();
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		fetchUserInfo();
+	}, []);
+
+	const fetchUserInfo = async () => {
+		let user = JSON.parse(await getDataFromSecureStore('user'));
+		dispatch(setUser(user));
+	};
+
 	return (
 		<SafeAreaProvider>
 			<Stack.Navigator>

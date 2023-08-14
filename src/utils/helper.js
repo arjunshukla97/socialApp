@@ -1,4 +1,5 @@
 import { Dimensions, PixelRatio, StatusBar } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 // Device Height and Width
 export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
@@ -43,4 +44,17 @@ export {
 	fontPixel,
 	pixelSizeVertical,
 	pixelSizeHorizontal,
+};
+
+export const setDataOnSecureStore = async (key, value) => {
+	await SecureStore.setItemAsync(key, value);
+};
+
+export const getDataFromSecureStore = async key => {
+	let result = await SecureStore.getItemAsync(key);
+	if (result) {
+		return result;
+	} else {
+		return null;
+	}
 };
