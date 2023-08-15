@@ -97,7 +97,9 @@ const Home = () => {
 					size={50}
 					uri={user?.image}
 					border
-					onPress={() => (user?.token ? _logout : navigate('Login'))}
+					onPress={() =>
+						user?.token ? _logout() : navigate('Login')
+					}
 				/>
 
 				<View style={styles.column}>
