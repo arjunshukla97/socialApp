@@ -63,7 +63,7 @@ const homeSlice = createSlice({
 			state.homeLoading = false;
 		});
 		builder.addCase(getComments.fulfilled, (state, action) => {
-			state.comments = action.payload.comments.reverse();
+			state.comments = action.payload.comments;
 			state.homeLoading = false;
 		});
 		builder.addCase(getComments.pending, state => {

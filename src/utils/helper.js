@@ -66,7 +66,9 @@ export const getDataFromSecureStore = async key => {
 export const convertTime = date => {
 	let currentDate = new Date();
 	let startDate = new Date(date);
+	// console.log('date is',startDate,currentDate)
 	let ms = Math.abs(currentDate - startDate);
+	// console.log('diff=>',ms)
 	let seconds = Math.round(ms / 1000);
 	let minutes = Math.round(ms / (1000 * 60));
 	let hours = Math.round(ms / (1000 * 60 * 60));

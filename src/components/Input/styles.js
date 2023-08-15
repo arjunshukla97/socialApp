@@ -34,4 +34,11 @@ export const styles = StyleSheet.create({
 		color: colors.text,
 		marginVertical: pixelSizeVertical(10),
 	},
+	error: {
+		fontSize: fontPixel(12),
+		color: colors.error,
+		marginLeft: pixelSizeHorizontal(15),
+		fontWeight: '500',
+		marginTop: pixelSizeVertical(4),
+	},
 });

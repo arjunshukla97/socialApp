@@ -8,10 +8,12 @@ import colors from '@constants/colors';
 import { convertTime, fontPixel, pixelSizeHorizontal } from '@utils/helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '@redux/action/home';
+import { useTime } from '@hooks/useTime';
 
 export const Comment = ({ item = {}, slug = '' }) => {
 	const dispatch = useDispatch();
 	const { user } = useSelector(state => state.auth);
+	const _useTime = useTime(item?.createdAt);
 
 	const _delete = () => {
 		Alert.alert(
@@ -43,9 +45,7 @@ export const Comment = ({ item = {}, slug = '' }) => {
 				<ProfilePic size={40} uri={item?.author?.image} />
 				<View style={styles.column}>
 					<Text style={styles.user}>{item?.author?.username}</Text>
-					<Text style={styles.time}>
-						{convertTime(item?.updatedAt)}
-					</Text>
+					<Text style={styles.time}>{_useTime}</Text>
 					<Text>{item?.body} </Text>
 					{item?.author?.username === user.username ? (
 						<View style={{ ...styles.row, ...styles.row2 }}>

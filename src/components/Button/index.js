@@ -6,9 +6,9 @@ import { styles } from './styles';
 
 export const Button = ({
 	onPress,
-	title,
-	loading,
-	style,
+	title = '',
+	loading = false,
+	style = {},
 	disabled = false,
 }) => {
 	return (

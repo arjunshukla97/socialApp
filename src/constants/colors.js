@@ -6,4 +6,5 @@ export default {
 	text: '#ffffff',
 	secondary: '#54617b',
 	disabled: '#9499AA',
+	error: '#B00020',
 };

@@ -7,13 +7,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { fontPixel, pixelSizeHorizontal } from '@utils/helper';
 
 export const Input = ({
-	value,
+	value = '',
 	onChangeText,
-	label,
-	isSecure,
-	containerStyle,
+	label = '',
+	isSecure = false,
+	containerStyle = {},
 	RightComponent,
 	LeftComponent,
+	error = '',
 	...otherProps
 }) => {
 	const [secure, setSecure] = useState(true);
@@ -45,6 +46,7 @@ export const Input = ({
 					<LeftComponent />
 				) : null}
 			</View>
+			{error ? <Text style={styles.error}>{error}</Text> : null}
 		</View>
 	);
 };

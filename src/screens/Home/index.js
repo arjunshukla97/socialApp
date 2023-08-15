@@ -19,11 +19,18 @@ import { navigationRef } from '@navigator/index';
 import { Loader } from '@components/Loader';
 import { removeDataOnSecureStore } from '@utils/helper';
 import { logoutUser } from '@redux/reducer/authSlice';
+import { navigate } from '@navigator/functions';
 
 const Home = () => {
 	const dispatch = useDispatch();
-	const { homeLoading, postList, limit, offset, newPostAvailable } =
-		useSelector(state => state.home);
+	const {
+		homeLoading,
+		postList,
+		limit,
+		offset,
+		newPostAvailable,
+		articlesCount,
+	} = useSelector(state => state.home);
 	const { user } = useSelector(state => state.auth);
 	const appState = useRef(AppState.currentState);
 
@@ -75,6 +82,11 @@ const Home = () => {
 		);
 	};
 
+	const _listFooterComponent = () =>
+		postList?.length > 0 && postList?.length < articlesCount ? (
+			<ActivityIndicator color={colors.primary} />
+		) : null;
+
 	if (homeLoading) {
 		return <Loader />;
 	}
@@ -85,7 +97,7 @@ const Home = () => {
 					size={50}
 					uri={user?.image}
 					border
-					onPress={_logout}
+					onPress={() => (user?.token ? _logout : navigate('Login'))}
 				/>
 
 				<View style={styles.column}>
@@ -109,11 +121,7 @@ const Home = () => {
 						data={postList}
 						onEndReached={fetchFeed}
 						onEndReachedThreshold={0.7}
-						ListFooterComponent={() =>
-							postList?.length > 0 ? (
-								<ActivityIndicator color={colors.primary} />
-							) : null
-						}
+						ListFooterComponent={_listFooterComponent}
 					/>
 				) : null}
 			</View>
