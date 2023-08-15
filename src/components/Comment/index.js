@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { styles } from './styles';
 import { ProfilePic } from '@components/ProfilePic';
 import Text from '@components/Text';
@@ -14,7 +14,28 @@ export const Comment = ({ item = {}, slug = '' }) => {
 	const { user } = useSelector(state => state.auth);
 
 	const _delete = () => {
-		dispatch(deleteComment({ slug, id: item.id, token: user?.token }));
+		Alert.alert(
+			`Hi ${user?.username}`,
+			'Are you sure, you want to delete this comment?',
+			[
+				{
+					text: 'Cancel',
+					onPress: () => console.log('Cancel Pressed'),
+					style: 'cancel',
+				},
+				{
+					text: 'Yes',
+					onPress: () =>
+						dispatch(
+							deleteComment({
+								slug,
+								id: item.id,
+								token: user?.token,
+							}),
+						),
+				},
+			],
+		);
 	};
 	return (
 		<View style={styles.container}>

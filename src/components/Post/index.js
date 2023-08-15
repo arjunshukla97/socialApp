@@ -8,6 +8,7 @@ import colors from '@constants/colors';
 import { navigate } from '@navigator/functions';
 import { useSelector } from 'react-redux';
 import { ProfilePic } from '@components/ProfilePic';
+import { navigationRef } from '@navigator/index';
 
 export const Post = ({ item = {} }) => {
 	const { user } = useSelector(state => state.auth);
@@ -76,9 +77,12 @@ export const Post = ({ item = {} }) => {
 						justifyContent: 'center',
 					}}
 					onPress={() =>
-						user?.token
+						user?.token &&
+						navigationRef.getCurrentRoute().name == 'Home'
 							? navigate('PostDetails', { slug: item?.slug })
-							: navigate('Login')
+							: navigationRef.getCurrentRoute().name == 'Home'
+							? navigate('Login')
+							: null
 					}
 				>
 					<Ionicons

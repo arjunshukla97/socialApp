@@ -50,6 +50,10 @@ export const setDataOnSecureStore = async (key, value) => {
 	await SecureStore.setItemAsync(key, value);
 };
 
+export const removeDataOnSecureStore = async key => {
+	await SecureStore.deleteItemAsync(key);
+};
+
 export const getDataFromSecureStore = async key => {
 	let result = await SecureStore.getItemAsync(key);
 	if (result) {

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import {
 	ActivityIndicator,
+	Alert,
 	AppState,
 	Pressable,
 	SafeAreaView,
@@ -16,6 +17,8 @@ import { ProfilePic } from '@components/ProfilePic';
 import { reloadPost } from '@redux/reducer/homeSlice';
 import { navigationRef } from '@navigator/index';
 import { Loader } from '@components/Loader';
+import { removeDataOnSecureStore } from '@utils/helper';
+import { logoutUser } from '@redux/reducer/authSlice';
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -57,13 +60,33 @@ const Home = () => {
 		dispatch(getFeed({ limit, offset }));
 	};
 
+	const _logout = () => {
+		Alert.alert(
+			`Hi ${user?.username}`,
+			'Are you sure you want to logout?',
+			[
+				{
+					text: 'Cancel',
+					onPress: () => console.log('Cancel Pressed'),
+					style: 'cancel',
+				},
+				{ text: 'Yes', onPress: () => dispatch(logoutUser()) },
+			],
+		);
+	};
+
 	if (homeLoading) {
 		return <Loader />;
 	}
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.row}>
-				<ProfilePic size={50} uri={user?.image} border />
+				<ProfilePic
+					size={50}
+					uri={user?.image}
+					border
+					onPress={_logout}
+				/>
 
 				<View style={styles.column}>
 					<Text style={styles.user}>Welcome,</Text>

@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { login } from '@redux/action/auth';
 import { universalGoBack } from '@navigator/functions';
-import { setDataOnSecureStore } from '@utils/helper';
+import { removeDataOnSecureStore, setDataOnSecureStore } from '@utils/helper';
+import Toast from 'react-native-root-toast';
+import colors from '@constants/colors';
 
 const initialState = {
 	authLoading: false,
@@ -15,6 +17,14 @@ const authSlice = createSlice({
 		setUser: (state, action) => {
 			state.user = action.payload;
 		},
+		logoutUser: state => {
+			state.user = {};
+			removeDataOnSecureStore('user');
+			Toast.show('Logged out successfully!', {
+				duration: Toast.durations.LONG,
+				backgroundColor: colors.primary,
+			});
+		},
 	},
 	extraReducers: builder => {
 		builder.addCase(login.pending, state => {
@@ -24,6 +34,10 @@ const authSlice = createSlice({
 			state.user = action.payload.user;
 			setDataOnSecureStore('user', JSON.stringify(action.payload.user));
 			state.authLoading = false;
+			Toast.show(`Welcome ${action.payload?.user?.username}`, {
+				duration: Toast.durations.LONG,
+				backgroundColor: colors.primary,
+			});
 			universalGoBack();
 		});
 		builder.addCase(login.rejected, state => {
@@ -32,5 +46,5 @@ const authSlice = createSlice({
 	},
 });
 
-export const { setUser } = authSlice.actions;
+export const { setUser, logoutUser } = authSlice.actions;
 export default authSlice.reducer;

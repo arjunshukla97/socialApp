@@ -1,3 +1,4 @@
+import colors from '@constants/colors';
 import {
 	addComment,
 	deleteComment,
@@ -7,6 +8,7 @@ import {
 	getSinglePost,
 } from '@redux/action/home';
 import { createSlice } from '@reduxjs/toolkit';
+import Toast from 'react-native-root-toast';
 
 const initialState = {
 	homeLoading: true,
@@ -73,12 +75,34 @@ const homeSlice = createSlice({
 		builder.addCase(addComment.fulfilled, (state, action) => {
 			state.comments = [action.payload.comment, ...state.comments];
 			state.homeLoading = false;
+			Toast.show('Comment added successfully!', {
+				duration: Toast.durations.LONG,
+				backgroundColor: colors.primary,
+			});
+		});
+		builder.addCase(addComment.rejected, (state, action) => {
+			state.homeLoading = false;
+			Toast.show('Something went wrong!', {
+				duration: Toast.durations.LONG,
+				backgroundColor: colors.primary,
+			});
 		});
 		builder.addCase(deleteComment.fulfilled, (state, action) => {
 			state.comments = state.comments?.filter(
 				x => x.id != action.payload.id,
 			);
 			state.homeLoading = false;
+			Toast.show('Comment deleted successfully!', {
+				duration: Toast.durations.LONG,
+				backgroundColor: colors.primary,
+			});
+		});
+		builder.addCase(deleteComment.rejected, (state, action) => {
+			state.homeLoading = false;
+			Toast.show('Something went wrong!', {
+				duration: Toast.durations.LONG,
+				backgroundColor: colors.primary,
+			});
 		});
 	},
 });
